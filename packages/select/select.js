@@ -12,8 +12,8 @@ export class DashedSelect extends DashedBase {
   static get properties() {
     return {
       ...super.properties,
-      disabled: Boolean,
-      value: String
+      disabled: { type: Boolean },
+      value: { type: String }
     };
   }
 
@@ -35,9 +35,13 @@ export class DashedSelect extends DashedBase {
           position: relative;
 
           border-bottom: ${this.dashWidth}px solid;
-          border-image: ${
-            borderImage(this.dashWidth, this.dashLength, this.dashSpacing, this.dashColor, this.borderRadius)
-          };
+          border-image: ${borderImage(
+            this.dashWidth,
+            this.dashLength,
+            this.dashSpacing,
+            this.dashColor,
+            this.borderRadius
+          )};
         }
 
         .select-container::before {

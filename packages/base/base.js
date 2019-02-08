@@ -21,11 +21,11 @@ export class DashedBase extends LitElement {
 
   static get properties() {
     return {
-      borderRadius: Number,
-      dashWidth: Number,
-      dashLength: Number,
-      dashSpacing: Number,
-      dashColor: String
+      borderRadius: { type: Number, attribute: 'border-radius' },
+      dashWidth: { type: Number, attribute: 'dash-width' },
+      dashLength: { type: Number, attribute: 'dash-length' },
+      dashSpacing: { type: Number, attribute: 'dash-spacing' },
+      dashColor: { type: String, attribute: 'dash-color' }
     };
   }
 

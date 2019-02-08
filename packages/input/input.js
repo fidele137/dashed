@@ -12,7 +12,7 @@ export class DashedInput extends DashedBase {
   static get properties() {
     return {
       ...super.properties,
-      disabled: Boolean
+      disabled: { type: Boolean }
     };
   }
 
@@ -36,9 +36,13 @@ export class DashedInput extends DashedBase {
           position: relative;
 
           border: ${this.dashWidth}px solid;
-          border-image: ${
-            borderImage(this.dashWidth, this.dashLength, this.dashSpacing, this.dashColor, this.borderRadius)
-          };
+          border-image: ${borderImage(
+            this.dashWidth,
+            this.dashLength,
+            this.dashSpacing,
+            this.dashColor,
+            this.borderRadius
+          )};
         }
 
         input {

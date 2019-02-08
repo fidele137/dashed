@@ -12,8 +12,8 @@ export class DashedButton extends DashedBase {
   static get properties() {
     return {
       ...super.properties,
-      disabled: Boolean,
-      rounded: Boolean
+      disabled: { type: Boolean },
+      rounded: { type: Boolean }
     };
   }
 
@@ -52,9 +52,13 @@ export class DashedButton extends DashedBase {
           transition: color 50ms ease-in-out;
 
           border: ${this.dashWidth}px solid;
-          border-image: ${
-            borderImage(this.dashWidth, this.dashLength, this.dashSpacing, this.dashColor, this.borderRadius)
-          };
+          border-image: ${borderImage(
+            this.dashWidth,
+            this.dashLength,
+            this.dashSpacing,
+            this.dashColor,
+            this.borderRadius
+          )};
         }
 
         button::before {

@@ -19,10 +19,10 @@ export class DashedSlider extends DashedBase {
   static get properties() {
     return {
       ...super.properties,
-      min: Number,
-      max: Number,
-      value: Number,
-      step: Number
+      min: { type: Number },
+      max: { type: Number },
+      value: { type: Number },
+      step: { type: Number }
     };
   }
 

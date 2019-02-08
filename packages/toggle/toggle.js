@@ -12,8 +12,8 @@ export class DashedToggle extends DashedBase {
   static get properties() {
     return {
       ...super.properties,
-      disabled: Boolean,
-      checked: Boolean
+      disabled: { type: Boolean },
+      checked: { type: Boolean }
     };
   }
 
@@ -62,9 +62,13 @@ export class DashedToggle extends DashedBase {
           height: ${24 - heightDelta}px;
 
           border: ${this.dashWidth}px solid;
-          border-image: ${
-            borderImage(this.dashWidth, this.dashLength, this.dashSpacing, this.dashColor, this.borderRadius)
-          };
+          border-image: ${borderImage(
+            this.dashWidth,
+            this.dashLength,
+            this.dashSpacing,
+            this.dashColor,
+            this.borderRadius
+          )};
         }
 
         span.toggle-background::before {

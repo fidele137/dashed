@@ -16,11 +16,11 @@ export class DashedHeader extends DashedBase {
   static get properties() {
     return {
       ...super.properties,
-      logoSrc: String,
-      logoText: String,
-      iconRight: String,
-      navItems: Array,
-      navOpened: Boolean
+      logoSrc: { type: String, attribute: 'logo-src' },
+      logoText: { type: String, attribute: 'logo-text' },
+      iconRight: { type: String, attribute: 'iconRight' },
+      navItems: { type: Array, attribute: 'nav-items' },
+      navOpened: { type: Boolean, attribute: 'nav-opened' }
     };
   }
 
@@ -72,9 +72,13 @@ export class DashedHeader extends DashedBase {
           align-items: center;
 
           border-bottom: ${this.dashWidth}px solid;
-          border-image: ${
-            borderImage(this.dashWidth, this.dashLength, this.dashSpacing, this.dashColor, this.borderRadius)
-          };
+          border-image: ${borderImage(
+            this.dashWidth,
+            this.dashLength,
+            this.dashSpacing,
+            this.dashColor,
+            this.borderRadius
+          )};
         }
 
         header::before {
@@ -198,17 +202,15 @@ export class DashedHeader extends DashedBase {
         <div></div>
         <nav class="${this._mobile ? 'sidebar' : 'topbar'} ${this.navOpened ? 'open' : ''}" role="navigation">
           <ul id="menu" role="menu" aria-labelledby="menubutton">
-            ${
-              this.navItems.map(
-                navItem => html`
-                  <li role="none">
-                    <a @click="${e => this._activateLink(e)}" role="menuitem" href="${navItem.href}">
-                      ${navItem.text}
-                    </a>
-                  </li>
-                `
-              )
-            }
+            ${this.navItems.map(
+              navItem => html`
+                <li role="none">
+                  <a @click="${e => this._activateLink(e)}" role="menuitem" href="${navItem.href}">
+                    ${navItem.text}
+                  </a>
+                </li>
+              `
+            )}
           </ul>
           <!-- <slot name="ul"></slot> -->
         </nav>

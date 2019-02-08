@@ -12,8 +12,8 @@ export class DashedFab extends DashedBase {
   static get properties() {
     return {
       ...super.properties,
-      disabled: Boolean,
-      ariaLabel: String
+      disabled: { type: Boolean },
+      ariaLabel: { type: String, attribute: 'aria-label' }
     };
   }
 
@@ -56,9 +56,13 @@ export class DashedFab extends DashedBase {
           transition: color 50ms ease-in-out;
 
           border: ${this.dashWidth}px solid;
-          border-image: ${
-            borderImage(this.dashWidth, this.dashLength, this.dashSpacing, this.dashColor, this.borderRadius)
-          };
+          border-image: ${borderImage(
+            this.dashWidth,
+            this.dashLength,
+            this.dashSpacing,
+            this.dashColor,
+            this.borderRadius
+          )};
         }
 
         button::before {
@@ -84,9 +88,13 @@ export class DashedFab extends DashedBase {
           right: 4px;
 
           border: ${this.dashWidth}px solid;
-          border-image: ${
-            borderImage(this.dashWidth, this.dashLength, this.dashSpacing, this.dashColor, borderRadiusInner)
-          };
+          border-image: ${borderImage(
+            this.dashWidth,
+            this.dashLength,
+            this.dashSpacing,
+            this.dashColor,
+            borderRadiusInner
+          )};
         }
       </style>
       <div class="button-container">

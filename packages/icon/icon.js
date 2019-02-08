@@ -8,12 +8,12 @@ export class DashedIcon extends LitElement {
 
   static get properties() {
     return {
-      name: String,
-      src: String,
-      iconsRoot: String,
-      size: Number,
-      ariaLabel: String,
-      ariaLabelledBy: String
+      name: { type: String },
+      src: { type: String },
+      iconsRoot: { type: String, attribute: 'icons-root' },
+      size: { type: Number },
+      ariaLabel: { type: String, attribute: 'aria-label' },
+      ariaLabelledBy: { type: String, attribute: 'aria-labelled-by' }
     };
   }
 

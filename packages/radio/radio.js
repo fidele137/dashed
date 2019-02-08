@@ -12,8 +12,8 @@ export class DashedRadio extends DashedBase {
   static get properties() {
     return {
       ...super.properties,
-      disabled: Boolean,
-      checked: Boolean
+      disabled: { type: Boolean },
+      checked: { type: Boolean }
     };
   }
 
@@ -41,9 +41,13 @@ export class DashedRadio extends DashedBase {
           height: 24px;
 
           border: ${this.dashWidth}px solid;
-          border-image: ${
-            borderImage(this.dashWidth, this.dashLength, this.dashSpacing, this.dashColor, this.borderRadius)
-          };
+          border-image: ${borderImage(
+            this.dashWidth,
+            this.dashLength,
+            this.dashSpacing,
+            this.dashColor,
+            this.borderRadius
+          )};
         }
 
         .radio-container::before {

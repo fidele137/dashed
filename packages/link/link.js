@@ -12,8 +12,8 @@ export class DashedLink extends DashedBase {
   static get properties() {
     return {
       ...super.properties,
-      disabled: Boolean,
-      role: String
+      disabled: { type: Boolean },
+      role: { type: String }
     };
   }
 
@@ -47,9 +47,13 @@ export class DashedLink extends DashedBase {
           transition: color 50ms ease-in-out;
 
           border-bottom: ${this.dashWidth}px solid;
-          border-image: ${
-            borderImage(this.dashWidth, this.dashLength, this.dashSpacing, this.dashColor, this.borderRadius)
-          };
+          border-image: ${borderImage(
+            this.dashWidth,
+            this.dashLength,
+            this.dashSpacing,
+            this.dashColor,
+            this.borderRadius
+          )};
         }
       </style>
       <a href="#"> <slot></slot> </a>
