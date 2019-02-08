@@ -1,8 +1,8 @@
 import { borderImage } from './border-image.js';
 import { sharedStyles } from './shared-styles.js';
-import { html, LitElement } from '@polymer/lit-element';
+import { html, LitElement } from 'lit-element';
 
-export { borderImage, sharedStyles, sharedStylesBis, html, render };
+export { borderImage, sharedStyles, html };
 
 /**
  * Abstract class implemented by all dashed elements
@@ -47,4 +47,4 @@ export class DashedBase extends LitElement {
     `;
   }
 }
-customElements.define('dashed-base', DashedBase);
+// customElements.define('dashed-base', DashedBase);

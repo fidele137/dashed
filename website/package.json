@@ -1,0 +1,58 @@
+{
+  "name": "dashed-site",
+  "version": "0.0.1",
+  "description": "A browser based editor built on top three.js",
+  "keywords": [
+    "Dashedjs website",
+    "Web Components",
+    "PWA"
+  ],
+  "scripts": {
+    "start": "gulp serve",
+    "link-dependencies": "bash ./scripts/link-dependencies.sh",
+    "build": "tsc && polymer build --auto-base-path && gulp prpl-server",
+    "build:static": "tsc && polymer build",
+    "serve": "prpl-server --root server/build",
+    "serve:static": "polymer serve --port 5000 build/es5-bundled",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:integration": "tsc && mocha test/integration --timeout=10000",
+    "test:unit": "tsc && polymer test --module-resolution=node --npm",
+    "test:sauce": "tsc && polymer test --module-resolution=node --npm -s 'windows 10/microsoftedge@17' -s 'macos 10.13/safari@11'",
+    "test:regenerate_screenshots": "tsc && mocha test/integration/screenshots-baseline/regenerate.js --timeout=15000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThreeCad/dashed.git"
+  },
+  "author": "Fidèle Palouki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ThreeCad/dashed/issues"
+  },
+  "homepage": "https://github.com/ThreeCad/dashed#readme",
+  "dependencies": {
+    "lit-element": "^2.0.1",
+    "lit-html": "^1.0.0",
+    "pwa-helpers": "^0.9.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0"
+  },
+  "devDependencies": {
+    "@polymer/test-fixture": "^4.0.2",
+    "axe-core": "^3.1.2",
+    "chai": "^4.2.0",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "mocha": "^5.2.0",
+    "pixelmatch": "^4.0.2",
+    "polymer-cli": "^1.9.5",
+    "polyserve": "^0.27.15",
+    "prpl-server": "^1.4.0",
+    "puppeteer": "^1.12.2",
+    "typescript": "^3.3.1",
+    "wct-mocha": "^1.0.0"
+  }
+}

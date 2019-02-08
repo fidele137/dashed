@@ -1,4 +1,4 @@
-import { html, LitElement } from '@polymer/lit-element';
+import { html, LitElement } from 'lit-element';
 
 export class DashedIcon extends LitElement {
   constructor() {
@@ -18,7 +18,8 @@ export class DashedIcon extends LitElement {
   }
 
   get iconsRoot() {
-    return this.getAttribute('icons-root') || 'assets/dashed-icons';
+    // return this.getAttribute('icons-root') || 'assets/dashed-icons';
+    return this.getAttribute('icons-root') || 'node_modules/@dashedjs/dashed-icons';
   }
   set iconsRoot(value) {
     return this.setAttribute('icons-root', value);
@@ -78,6 +79,7 @@ export class DashedIcon extends LitElement {
         ? `${this.iconsRoot}/${this.name}.svg`
         : `/${this.iconsRoot}/${this.name}.svg`;
     }
+    console.log({ iconUrl });
     try {
       const res = await fetch(iconUrl, { cache: 'force-cache' });
       if (res.status !== 200) {
