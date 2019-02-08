@@ -3,7 +3,7 @@ import { html, LitElement } from 'lit-element';
 export class DashedIcon extends LitElement {
   constructor() {
     super();
-    this.iconsRoot = 'assets/dashed-icons';
+    this.iconsRoot = 'node_modules/@dashedjs/dashed-icons';
   }
 
   static get properties() {
