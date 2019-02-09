@@ -2,7 +2,7 @@
   "name": "@dashedjs/dashed-toggle",
   "version": "0.0.1",
   "description": "Toggle web component",
-  "main": "toggle.js",
+  "main": "dist/toggle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

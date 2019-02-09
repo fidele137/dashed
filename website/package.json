@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "start": "gulp serve",
-    "link-dependencies": "bash ./scripts/link-dependencies.sh",
+    "link:dependencies": "bash ./scripts/link-dependencies.sh",
     "build": "tsc && polymer build --auto-base-path && gulp prpl-server",
     "build:static": "tsc && polymer build",
     "serve": "prpl-server --root server/build",

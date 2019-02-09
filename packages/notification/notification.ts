@@ -1,5 +1,7 @@
-import { DashedBase, borderImage, sharedStyles, html } from '@dashedjs/dashed-base';
+import { html, customElement } from 'lit-element';
+import { DashedBase, borderImage, sharedStyles } from '@dashedjs/dashed-base/dist/base.js';
 
+@customElement('dashed-notification')
 export class DashedNotification extends DashedBase {
   constructor() {
     super();
@@ -34,9 +36,13 @@ export class DashedNotification extends DashedBase {
           padding: 4px;
 
           border: ${this.dashWidth}px solid;
-          border-image: ${
-            borderImage(this.dashWidth, this.dashLength, this.dashSpacing, this.dashColor, this.borderRadius)
-          };
+          border-image: ${borderImage(
+            this.dashWidth,
+            this.dashLength,
+            this.dashSpacing,
+            this.dashColor,
+            this.borderRadius
+          )};
         }
 
         .notification__icon {
@@ -64,4 +70,3 @@ export class DashedNotification extends DashedBase {
     `;
   }
 }
-customElements.define('dashed-notification', DashedNotification);

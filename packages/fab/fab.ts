@@ -1,20 +1,17 @@
-import { DashedBase, borderImage, sharedStyles, html } from '@dashedjs/dashed-base';
+import { html, property, customElement } from 'lit-element';
+import { DashedBase, borderImage, sharedStyles } from '@dashedjs/dashed-base/dist/base.js';
 
+@customElement('dashed-fab')
 export class DashedFab extends DashedBase {
+  @property({ type: Boolean }) disabled!: boolean;
+  @property({ type: Boolean, attribute: 'aria-label' }) ariaLabel!: string;
+
   constructor() {
     super();
     this.borderRadius = 24;
     this.dashWidth = 2;
     this.dashLength = 4;
     this.dashSpacing = 2;
-  }
-
-  static get properties() {
-    return {
-      ...super.properties,
-      disabled: { type: Boolean },
-      ariaLabel: { type: String, attribute: 'aria-label' }
-    };
   }
 
   render() {
@@ -103,4 +100,3 @@ export class DashedFab extends DashedBase {
     `;
   }
 }
-customElements.define('dashed-fab', DashedFab);

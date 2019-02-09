@@ -1,5 +1,7 @@
-import { DashedBase, borderImage, sharedStyles, html } from '../base/base';
+import { html, customElement } from 'lit-element';
+import { DashedBase, borderImage, sharedStyles } from '@dashedjs/dashed-base/dist/base.js';
 
+@customElement('dashed-card')
 export class DashedCard extends DashedBase {
   constructor() {
     super();
@@ -81,4 +83,3 @@ export class DashedCard extends DashedBase {
       `;
   }
 }
-customElements.define('dashed-card', DashedCard);

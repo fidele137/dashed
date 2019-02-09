@@ -1,21 +1,21 @@
-import { DashedBase, borderImage, sharedStyles, html } from '@dashedjs/dashed-base/base.js';
+import { html, property, customElement } from 'lit-element';
+import { DashedBase, borderImage, sharedStyles } from '@dashedjs/dashed-base/dist/base.js';
 
-export class DashedTag extends DashedBase {
+@customElement('dashed-button')
+export class DashedButton extends DashedBase {
+  @property({ type: Boolean }) disabled!: boolean;
+  @property({ type: Boolean }) rounded!: boolean;
+
   constructor() {
     super();
-    this.borderRadius = 16;
+    this.borderRadius = 0;
     this.dashWidth = 2;
     this.dashLength = 8;
-    this.dashSpacing = 4;
-
-    this._active = false;
+    this.dashSpacing = 2.4;
   }
 
-  static get properties() {
-    return {
-      ...super.properties,
-      disabled: { type: Boolean }
-    };
+  firstUpdated() {
+    console.log('renderRoot', this.renderRoot);
   }
 
   render() {
@@ -23,29 +23,31 @@ export class DashedTag extends DashedBase {
       ${sharedStyles}
       <style>
         :host {
+          --padding: 4px 12px;
+          --color: inherit;
           display: inline-block;
           cursor: pointer;
           outline: none;
           position: relative;
-          font-size: 12px;
         }
 
         :host(:hover) {
-          color: var(--color-primary);
           --color-fill: var(--color-primary-light);
         }
 
         button {
-          min-width: 32px;
-          min-height: 24px;
+          padding: var(--padding);
+          color: var(--color);
+          min-width: 48px;
+          min-height: 32px;
+          width: 100%;
+          height: 100%;
           display: inline-flex;
           align-items: center;
           justify-content: center;
           background: none;
           cursor: inherit;
-          color: inherit;
           outline: none;
-          padding: 4px 10px;
           font-size: inherit;
           position: relative;
           transition: color 50ms ease-in-out;
@@ -65,31 +67,19 @@ export class DashedTag extends DashedBase {
           position: absolute;
           top: 0;
           left: 0;
-          width: 100%;
-          height: 100%;
+          right: 0;
+          bottom: 0;
+          border: ${this.dashWidth}px;
           border-radius: ${this.borderRadius}px;
-          background: var(--color-primary-light);
+          // background: var(--color-primary-light);
         }
 
-        button.active {
-          color: var(--color-danger);
-        }
-
-        :host ::slotted(dashed-icon[slot='icon']),
-        :host ::slotted(svg) {
+        :host ::slotted([slot='icon']) {
           stroke: currentColor;
-          padding-left: 4px;
+          padding-right: 4px;
         }
       </style>
-      <button type="button" @click="${e => this._toggleTag(e)}" class="${this._active ? 'active' : ''}">
-        <slot></slot> <slot name="icon"></slot>
-      </button>
+      <button type="button"><slot name="icon"></slot> <slot></slot></button>
     `;
   }
-
-  _toggleTag(e) {
-    this._active = !this._active;
-    this.requestUpdate();
-  }
 }
-customElements.define('dashed-tag', DashedTag);

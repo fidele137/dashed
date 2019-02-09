@@ -1,6 +1,17 @@
-import { DashedBase, borderImage, sharedStyles, html } from '@dashedjs/dashed-base';
+import { html, property, customElement } from 'lit-element';
+import { DashedBase, borderImage, sharedStyles } from '@dashedjs/dashed-base/dist/base.js';
 
+@customElement('dashed-header')
 export class DashedHeader extends DashedBase {
+  @property({ type: String, attribute: 'logo-src' }) logoSrc!: string;
+  @property({ type: String, attribute: 'logo-text' }) logoText!: string;
+  @property({ type: String, attribute: 'icon-right' }) iconRight!: string;
+  @property({ type: Array, attribute: 'nav-items' }) navItems!: any[];
+  @property({ type: String, attribute: 'nav-opened' }) navOpened!: boolean;
+
+  private _mobile: boolean = false;
+  private _mediaQueryList!: MediaQueryList;
+
   constructor() {
     super();
     this.borderRadius = 0;
@@ -11,17 +22,6 @@ export class DashedHeader extends DashedBase {
     this.navItems = [];
     this.navOpened = false;
     this._mobile = true;
-  }
-
-  static get properties() {
-    return {
-      ...super.properties,
-      logoSrc: { type: String, attribute: 'logo-src' },
-      logoText: { type: String, attribute: 'logo-text' },
-      iconRight: { type: String, attribute: 'iconRight' },
-      navItems: { type: Array, attribute: 'nav-items' },
-      navOpened: { type: Boolean, attribute: 'nav-opened' }
-    };
   }
 
   connectedCallback() {
@@ -187,7 +187,7 @@ export class DashedHeader extends DashedBase {
       </style>
       <header>
         <button
-          @click="${e => this._toggleMenu(e)}"
+          @click="${this._toggleMenu}"
           id="menubutton"
           aria-expanded="${this.navOpened}"
           aria-controls="menu"
@@ -205,7 +205,7 @@ export class DashedHeader extends DashedBase {
             ${this.navItems.map(
               navItem => html`
                 <li role="none">
-                  <a @click="${e => this._activateLink(e)}" role="menuitem" href="${navItem.href}">
+                  <a @click="${(e: Event) => this._activateLink(e)}" role="menuitem" href="${navItem.href}">
                     ${navItem.text}
                   </a>
                 </li>
@@ -219,28 +219,28 @@ export class DashedHeader extends DashedBase {
     `;
   }
 
-  _toggleMenu(e) {
+  _toggleMenu() {
     this.navOpened = !this.navOpened;
   }
 
-  _closeMenu(e) {
+  _closeMenu(e: Event) {
     if (e.target != this && this.navOpened) {
       e.stopPropagation();
       this.navOpened = false;
     }
   }
 
-  _activateLink(e) {
-    const oldActive = this.shadowRoot.querySelector('.active');
+  _activateLink(e: any) {
+    const oldActive = this.renderRoot!.querySelector('.active');
     if (oldActive) {
       oldActive.classList.remove('active');
     }
     const newActive = e.target;
-    newActive.classList.add('active');
+    newActive!.classList.add('active');
     this._closeMenu(e);
   }
 
-  _mediaQueryChange(e) {
+  _mediaQueryChange(e: any) {
     if (e.matches) {
       /* Desktop */
       this._mobile = false;
@@ -252,4 +252,3 @@ export class DashedHeader extends DashedBase {
     }
   }
 }
-customElements.define('dashed-header', DashedHeader);

@@ -2,7 +2,7 @@
   "name": "@dashedjs/dashed-fab",
   "version": "0.0.1",
   "description": "Fab web component",
-  "main": "fab.js",
+  "main": "dist/fab.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

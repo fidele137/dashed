@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 
 export const sharedStyles = html`
-  <style title="Shared styles">
+  <style>
     :host {
       --color-primary: #3636e7;
       --color-primary-light: #3636e726;

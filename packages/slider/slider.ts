@@ -1,6 +1,15 @@
-import { DashedBase, sharedStyles, html } from '@dashedjs/dashed-base/base.js';
+import { html, property, customElement } from 'lit-element';
+import { DashedBase, borderImage, sharedStyles } from '@dashedjs/dashed-base/dist/base.js';
 
+@customElement('dashed-slider')
 export class DashedSlider extends DashedBase {
+  @property({ type: Number }) value: number = 30;
+  @property({ type: Number }) min: number = 0;
+  @property({ type: Number }) max: number = 100;
+  @property({ type: Number }) step: number = 1;
+
+  private _percentage: string;
+
   constructor() {
     super();
     this.borderRadius = 0;
@@ -89,7 +98,7 @@ export class DashedSlider extends DashedBase {
       <label for="range"><slot></slot></label>
       <div class="slider-container">
         <input
-          @input="${e => this._onInputHandler(e)}"
+          @input="${(e: Event) => this._onInputHandler(e)}"
           type="range"
           id="range"
           min="${this.min}"
@@ -121,10 +130,9 @@ export class DashedSlider extends DashedBase {
     `;
   }
 
-  _onInputHandler(e) {
-    this.value = parseFloat(e.target.value);
+  _onInputHandler(e: any) {
+    this.value = parseFloat(e!.target!.value);
     this._percentage = `${((this.value - this.min) / (this.max - this.min)) * 100}%`;
     this.requestUpdate();
   }
 }
-customElements.define('dashed-slider', DashedSlider);

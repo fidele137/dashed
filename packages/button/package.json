@@ -2,7 +2,7 @@
   "name": "@dashedjs/dashed-button",
   "version": "0.0.1",
   "description": "Button web component",
-  "main": "button.js",
+  "main": "dist/button.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

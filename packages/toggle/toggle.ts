@@ -1,20 +1,16 @@
-import { DashedBase, borderImage, sharedStyles, html } from '@dashedjs/dashed-base/base.js';
+import { html, property, customElement } from 'lit-element';
+import { DashedBase, borderImage, sharedStyles } from '@dashedjs/dashed-base/dist/base.js';
 
+@customElement('dashed-toggle')
 export class DashedToggle extends DashedBase {
+  @property({ type: Boolean }) disabled!: boolean;
+  @property({ type: Boolean }) checked!: boolean;
   constructor() {
     super();
     this.borderRadius = 12;
     this.dashWidth = 2;
     this.dashLength = 8;
     this.dashSpacing = 2;
-  }
-
-  static get properties() {
-    return {
-      ...super.properties,
-      disabled: { type: Boolean },
-      checked: { type: Boolean }
-    };
   }
 
   render() {
@@ -103,4 +99,3 @@ export class DashedToggle extends DashedBase {
     `;
   }
 }
-customElements.define('dashed-toggle', DashedToggle);

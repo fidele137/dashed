@@ -1,33 +1,20 @@
 import { borderImage } from './border-image.js';
 import { sharedStyles } from './shared-styles.js';
-import { html, LitElement } from 'lit-element';
+import { html, LitElement, property } from 'lit-element';
 
-export { borderImage, sharedStyles, html };
+export { borderImage, sharedStyles };
 
 /**
  * Abstract class implemented by all dashed elements
  * Should not be directly instancied
  *
- * @export
- * @abstract
- * @class DashedBase
- * @extends {HTMLElement}
  */
 export class DashedBase extends LitElement {
-  constructor() {
-    super();
-    this.dashColor = '#3636e7';
-  }
-
-  static get properties() {
-    return {
-      borderRadius: { type: Number, attribute: 'border-radius' },
-      dashWidth: { type: Number, attribute: 'dash-width' },
-      dashLength: { type: Number, attribute: 'dash-length' },
-      dashSpacing: { type: Number, attribute: 'dash-spacing' },
-      dashColor: { type: String, attribute: 'dash-color' }
-    };
-  }
+  @property({ type: Number, attribute: 'border-radius' }) borderRadius!: number;
+  @property({ type: Number, attribute: 'dash-width' }) dashWidth!: number;
+  @property({ type: Number, attribute: 'dash-length' }) dashLength!: number;
+  @property({ type: Number, attribute: 'dash-spacing' }) dashSpacing!: number;
+  @property({ type: String, attribute: 'dash-color' }) dashColor: string = '#3636e7';
 
   // get dashColor() {
   //   const dashColor = this.getAttribute('dash-color') || '';

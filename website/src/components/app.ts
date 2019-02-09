@@ -1,9 +1,5 @@
 import { LitElement, html, customElement, property, css } from 'lit-element';
 
-import './nav.js';
-import './get-started.js';
-import './home.js';
-
 // import '@dashedjs/dashed-core/packages/index.js';
 
 // import { DashedButton } from '@dashedjs/dashed-core/packages/button/button.js';
@@ -38,6 +34,10 @@ import '@dashedjs/dashed-core/packages/slider/slider.js';
 import '@dashedjs/dashed-core/packages/tag/tag.js';
 import '@dashedjs/dashed-core/packages/toggle/toggle.js';
 
+import './nav.js';
+import './get-started.js';
+import './home.js';
+
 import { connect } from 'pwa-helpers/connect-mixin.js';
 // // This element is connected to the Redux store.
 import { store } from '../redux/store.js';
@@ -47,8 +47,13 @@ export class SiteApp extends connect(store)(LitElement) {
   @property({ type: String }) name = 'site-app';
 
   static styles = css`
-    --color-stop-top: #fbfafe;
-    --color-stop-bottom: #e4e4e4;
+    :host {
+      --color-stop-top: #fbfafe;
+      --color-stop-bottom: #e4e4e4;
+
+      display: block;
+      min-height: 100vh;
+    }
   `;
 
   render() {

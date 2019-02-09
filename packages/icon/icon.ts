@@ -1,33 +1,40 @@
-import { html, LitElement } from 'lit-element';
+import { html, LitElement, property, customElement } from 'lit-element';
 
+@customElement('dashed-icon')
 export class DashedIcon extends LitElement {
+  @property({ type: String }) name!: string;
+  @property({ type: String }) src!: string;
+  @property({ type: String, attribute: 'icons-root' }) iconsRoot: string = 'node_modules/@dashedjs/dashed-icons';
+  @property({ type: String }) size!: string;
+  @property({ type: String, attribute: 'aria-label' }) ariaLabel!: string;
+  @property({ type: String, attribute: 'aria-labelled-by' }) ariaLabelledBy!: string;
+
   constructor() {
     super();
     this.iconsRoot = 'node_modules/@dashedjs/dashed-icons';
   }
 
-  static get properties() {
-    return {
-      name: { type: String },
-      src: { type: String },
-      iconsRoot: { type: String, attribute: 'icons-root' },
-      size: { type: Number },
-      ariaLabel: { type: String, attribute: 'aria-label' },
-      ariaLabelledBy: { type: String, attribute: 'aria-labelled-by' }
-    };
-  }
+  // static get properties() {
+  //   return {
+  //     name: { type: String },
+  //     src: { type: String },
+  //     iconsRoot: { type: String, attribute: 'icons-root' },
+  //     size: { type: Number },
+  //     ariaLabel: { type: String, attribute: 'aria-label' },
+  //     ariaLabelledBy: { type: String, attribute: 'aria-labelled-by' }
+  //   };
+  // }
 
-  get iconsRoot() {
-    // return this.getAttribute('icons-root') || 'assets/dashed-icons';
-    return this.getAttribute('icons-root') || 'node_modules/@dashedjs/dashed-icons';
-  }
-  set iconsRoot(value) {
-    return this.setAttribute('icons-root', value);
-  }
+  // get iconsRoot() {
+  //   // return this.getAttribute('icons-root') || 'assets/dashed-icons';
+  //   return this.getAttribute('icons-root') || 'node_modules/@dashedjs/dashed-icons';
+  // }
+  // set iconsRoot(value) {
+  //   this.setAttribute('icons-root', value);
+  // }
 
   async render() {
     const svg = await this.fetchIcon();
-    console.log({ svg });
     return html`
       <style>
         :host {
@@ -71,7 +78,7 @@ export class DashedIcon extends LitElement {
   }
 
   async fetchIcon() {
-    let iconUrl;
+    let iconUrl!: string;
     if (this.src) {
       iconUrl = /^\//.test(this.src) ? this.src : `/${this.src}`;
     } else if (this.name) {
@@ -79,7 +86,6 @@ export class DashedIcon extends LitElement {
         ? `${this.iconsRoot}/${this.name}.svg`
         : `/${this.iconsRoot}/${this.name}.svg`;
     }
-    console.log({ iconUrl });
     try {
       const res = await fetch(iconUrl, { cache: 'force-cache' });
       if (res.status !== 200) {
@@ -89,8 +95,7 @@ export class DashedIcon extends LitElement {
       }
       return res.text();
     } catch (err) {
-      console.error(err);
+      return console.error(err);
     }
   }
 }
-customElements.define('dashed-icon', DashedIcon);

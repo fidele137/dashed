@@ -1,6 +1,11 @@
-export function borderImage(dashWidth, dashLength, dashSpacing, dashColor, borderRadius = 0) {
+export function borderImage(
+  dashWidth: number,
+  dashLength: number,
+  dashSpacing: number,
+  dashColor: string,
+  borderRadius: number = 0
+) {
   const [width, length, spacing, color, radius] = [dashWidth, dashLength, dashSpacing, dashColor, borderRadius];
-  console.log({ borderImage: color });
 
   const borderImageRepeat = 'round';
   let borderImageSlice;

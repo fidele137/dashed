@@ -1,20 +1,17 @@
-import { DashedBase, borderImage, sharedStyles, html } from '@dashedjs/dashed-base';
+import { html, property, customElement } from 'lit-element';
+import { DashedBase, borderImage, sharedStyles } from '@dashedjs/dashed-base/dist/base.js';
 
-export class DashedRadio extends DashedBase {
+@customElement('dashed-checkbox')
+export class DashedCheckbox extends DashedBase {
+  @property({ type: Boolean }) disabled!: boolean;
+  @property({ type: Boolean }) checked!: boolean;
+
   constructor() {
     super();
-    this.borderRadius = 12;
+    this.borderRadius = 0;
     this.dashWidth = 2;
     this.dashLength = 4;
     this.dashSpacing = 2;
-  }
-
-  static get properties() {
-    return {
-      ...super.properties,
-      disabled: { type: Boolean },
-      checked: { type: Boolean }
-    };
   }
 
   render() {
@@ -34,7 +31,7 @@ export class DashedRadio extends DashedBase {
           padding-left: 8px;
         }
 
-        .radio-container {
+        .checkbox-container {
           display: inline-block;
           position: relative;
           width: 24px;
@@ -50,7 +47,7 @@ export class DashedRadio extends DashedBase {
           )};
         }
 
-        .radio-container::before {
+        .checkbox-container::before {
           content: '';
           position: absolute;
           top: 0;
@@ -61,30 +58,30 @@ export class DashedRadio extends DashedBase {
           background: var(--color-primary-light);
         }
 
-        input[type='radio'] {
+        input[type='checkbox'] {
           margin: 0;
           width: 100%;
           height: 100%;
           opacity: 0;
         }
 
-        svg.dash .inner-circle {
-          fill: var(--color-danger);
+        svg.dash .checkmark {
+          stroke: var(--color-danger);
+          stroke-width: ${this.dashWidth * 1.8};
         }
 
-        input[type='radio']:not(:checked) ~ svg.dash .inner-circle {
+        input[type='checkbox']:not(:checked) ~ svg.dash .checkmark {
           opacity: 0;
         }
 
-        input[type='radio']:checked ~ svg.dash .inner-circle {
+        input[type='checkbox']:checked ~ svg.dash .checkmark {
           opacity: 1;
         }
       </style>
-      <div class="radio-container">
-        <input type="radio" id="radio" /> <svg class="dash"><circle class="inner-circle" cx="12" cy="12" r="5" /></svg>
+      <div class="checkbox-container">
+        <input type="checkbox" id="checkbox" /> <svg class="dash"><path class="checkmark" d="M6 12l4 4l8 -8" /></svg>
       </div>
-      <label for="radio"><slot></slot></label>
+      <label for="checkbox"><slot></slot></label>
     `;
   }
 }
-customElements.define('dashed-radio', DashedRadio);

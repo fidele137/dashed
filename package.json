@@ -8,7 +8,7 @@
   "types": "dist/dashed.d.ts",
   "scripts": {
     "tsc:watch": "tsc -w",
-    "start": "polyserve --npm --module-resolution=node",
+    "start": "tsc -w && polyserve --npm --module-resolution=node",
     "bootstrap": "lerna bootstrap --hoist",
     "install:dependencies": "bash scripts/install-dependencies.sh",
     "remove:folders": "bash scripts/remove-folders.sh",
@@ -50,7 +50,9 @@
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-terser": "^4.0.4",
-    "semantic-release": "^15.13.3"
+    "rollup-plugin-typescript": "^1.0.0",
+    "semantic-release": "^15.13.3",
+    "typescript": "^3.3.3"
   },
   "dependencies": {
     "@webcomponents/webcomponentsjs": "^2.2.6",

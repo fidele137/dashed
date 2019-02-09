@@ -1,20 +1,17 @@
-import { DashedBase, borderImage, sharedStyles, html } from '@dashedjs/dashed-base';
+import { html, property, customElement } from 'lit-element';
+import { DashedBase, borderImage, sharedStyles } from '@dashedjs/dashed-base/dist/base.js';
 
+@customElement('dashed-link')
 export class DashedLink extends DashedBase {
+  @property({ type: Boolean }) disabled!: boolean;
+  @property({ type: String }) role!: string;
+
   constructor() {
     super();
     this.borderRadius = 0;
     this.dashWidth = 1.5;
     this.dashLength = 8;
     this.dashSpacing = 2;
-  }
-
-  static get properties() {
-    return {
-      ...super.properties,
-      disabled: { type: Boolean },
-      role: { type: String }
-    };
   }
 
   render() {
@@ -60,4 +57,3 @@ export class DashedLink extends DashedBase {
     `;
   }
 }
-customElements.define('dashed-link', DashedLink);

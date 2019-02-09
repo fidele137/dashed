@@ -3,6 +3,7 @@ const rollup = require('rollup');
 const resolve = require('rollup-plugin-node-resolve');
 const terser = require('rollup-plugin-terser');
 const replace = require('rollup-plugin-replace');
+const typescript = require('rollup-plugin-typescript');
 
 const packages = [
   'base',
@@ -32,8 +33,11 @@ gulp.task('buildBundle', buildBundle);
 function buildBundle() {
   return rollup
     .rollup({
-      input: 'packages/index.js',
+      input: 'packages/index.ts',
       plugins: [
+        typescript({
+          typescript: require('typescript')
+        }),
         resolve(),
         terser.terser({
           module: true,
@@ -54,8 +58,11 @@ function buildBundle() {
 async function buildSeries() {
   for (let package of packages) {
     const rollupFileBuild = await rollup.rollup({
-      input: `packages/${package}/${package}.js`,
+      input: `packages/${package}/${package}.ts`,
       plugins: [
+        typescript({
+          typescript: require('typescript')
+        }),
         resolve(),
         replace({ values: { hello: '' } }),
         terser.terser({
@@ -64,8 +71,8 @@ async function buildSeries() {
             module: true
           }
         })
-      ],
-      experimentalCodeSplitting: true
+      ]
+      // experimentalCodeSplitting: true
     });
     console.log(`Building package: ${package} ...`);
     rollupFileBuild.write({
@@ -80,8 +87,11 @@ async function buildParallel() {
     packages.map(package =>
       rollup
         .rollup({
-          input: `packages/${package}/${package}.js`,
+          input: `packages/${package}/${package}.ts`,
           plugins: [
+            typescript({
+              typescript: require('typescript')
+            }),
             resolve(),
             terser.terser({
               module: true,
